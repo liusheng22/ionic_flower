@@ -1,0 +1,23 @@
+<ion-header>
+  <!-- <ion-navbar>
+          <ion-title>Page1</ion-title>
+        </ion-navbar> -->
+
+  <ion-toolbar>
+    <ion-title>Sign up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input type="text" [(ngModel)]="User.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Password</ion-label>
+      <ion-input type="password" [(ngModel)]="User.pwd"></ion-input>
+    </ion-item>
+  </ion-list>
+  <button ion-button color="secondary" round outline (click)="Signup()">Sign up</button>
+</ion-content>

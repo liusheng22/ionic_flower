@@ -1,0 +1,108 @@
+<!-- 导航栏 -->
+<ion-header>
+
+  <!--
+    <ion-navbar>
+      <ion-buttons start>
+        <button ion-button icon-only (click)="openModal()">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-buttons>
+  
+      <ion-title>
+        Home
+      </ion-title>
+  
+      <ion-buttons end>
+        <button ion-button icon-only (click)="openModal()">
+          <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  -->
+  <ion-toolbar >
+    <ion-searchbar placeholder="搜索: 想找点什么..."></ion-searchbar>
+    <ion-icon name="text" class="top_header_message_icon"></ion-icon>
+  </ion-toolbar>
+
+</ion-header>
+
+<!-- 主体 内容 -->
+<ion-content overflow-scroll="true">
+
+    <!-- 轮播图 -->
+    <div class="carousel">
+      <ion-slides loop="true" class="slidebox" on-slide-changed="slideHasChanged($index)" slide-interval="10" does-continue="true" auto-play="true" show-pager="true" delegate-handle="slideimgs">  
+          <!--does-continue="true"循环，auto-play="true"自动滑动 , show-pager="false"隐藏页面指示点-->  
+          <ion-slide *ngFor="let banner of banner" (tap)="productDetail(banner.num)" >  
+              <a title="{{banner.title}}" href="{{banner.link}}"><img src="{{banner.src}}" class="imgSlide"></a>  
+          </ion-slide>  
+      </ion-slides>  
+    </div>
+
+    <!-- 首页分类 -->
+    <div class="goodsCategory">
+      <div *ngFor="let category of goodsCategoryImg" class="{{category.className}}" (tap)="goToClassList(category.alt)" >
+          <a href="{{category.href}}">
+            <img src="{{category.src}}" alt="{{category.alt}}">
+          </a>
+      </div>
+    </div>
+
+    <div class="main_content" *ngFor="let i of recommendNumArr" >
+      <!-- 首页主体 标题 -->
+      <!-- *ngFor="let content of mainContent" -->
+      <div class="main_title">
+        <h3 class="main_title_text">
+          {{mainContent[i].main_til}}
+          <i>
+            / {{mainContent[i].main_til_i}}
+          </i>
+        </h3>
+      </div>
+
+      <!-- 商品推荐 -->
+      <div class="goods_recommend">
+          <!-- <ion-grid> -->
+            <ion-row>
+              <ion-col col-6 text-center *ngFor="let recommend of goodsRecommend[i]">
+                <div class="product_view">
+                  <!-- 商品图片 -->
+                  <a  class="product_pic" (press)="showGroupBtn(recommend.pid)" (tap)="showproductDetail(recommend.pid)" >
+                    <img src="{{recommend.src}}" alt="">
+                  </a>
+                  <!-- 商品信息 -->
+                  <div class="product_info">
+                    <p class="product_info_til">
+                      <a href="{{recommend.href}}" title="{{recommend.page_title}}">{{recommend.page_title}}</a>
+                    </p>
+                    <a href="{{recommend.href}}" class="product_introduce" title="{{recommend.short_desc}}" [innerHTML]="recommend.short_desc" >
+                    </a>
+                    <!-- <a href="{{recommend.href}}" class="product_introduce" title="{{recommend.short_desc}}">
+                      {{recommend.short_desc}}
+                    </a> -->
+                    <p class="product_price" > 
+                      <i title="{{recommend.price_min}}" class="product_price_sale">￥{{(recommend.price_min/100).toFixed(2)}}</i>
+                      <s class="product_price_origin" *ngIf="recommend.price_origin" >原价￥{{(recommend.price_origin/100).toFixed(2)}}</s>
+                    </p>
+                  </div>
+                  <!-- 功能组按钮 -->
+                  <div class="group_btn" *ngIf="group_isShow == recommend.pid"  >
+                    <div class="group_btn_bg" (click)="showGroupBtn('')">
+                      <!-- 显示半透明背景 -->
+                    </div>
+                    <div class="group_btn_box">
+                      <img src="{{recommend.QR_code}}" *ngIf="QRcode == recommend.QR_code" alt="">
+                      <a *ngFor="let group_btn of group_btn" (tap)="groupBtnFun(group_btn.group_til,recommend.pid,recommend.QR_code)" class="{{group_btn.className}}"  href="{{group_btn.tap_href}}" title="{{group_btn.group_til}}" >
+                        <i><ion-icon name="{{group_btn.tap}}" [color]="group_btn.color"></ion-icon></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </ion-col>
+            </ion-row>
+          <!-- </ion-grid> -->
+      </div>
+    </div>
+
+</ion-content>

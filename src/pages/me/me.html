@@ -1,0 +1,118 @@
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        Me
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    <div *ngIf="notLogin"  >
+    <!-- <div *ngIf="true"  > -->
+      <ion-card>
+        <ion-card-header text-center>
+          登录 iGive , 体验更多
+        </ion-card-header>
+        <ion-card-content text-center>
+          <button ion-button outline small (click)="showSign()">登录/注册</button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- <div ng-if="logined" > -->
+    <div *ngIf="logined" >
+
+      <!-- <ion-list>
+        <button ion-item icon-start>
+          <ion-icon name="home" item-start></ion-icon>
+          内容1
+        </button>
+      </ion-list> -->
+
+      <ion-list class="marginTop">
+        <button ion-item (click)="jumpUserPage()" >
+          <ion-avatar item-start>
+            <img src="{{headface}}" />
+          </ion-avatar>
+          <h2>{{userinfo.UserNickName}}</h2>
+          <p>查看个人主页或编辑简介</p>
+        </button>
+      </ion-list>
+
+      <ion-list no-border>
+
+          <ion-list-header>
+            我的工具
+          </ion-list-header>
+      
+          <button ion-item  >
+            <ion-icon name='planet' item-start></ion-icon>
+            <ion-label>工具1</ion-label>
+          </button>
+          <button ion-item  >
+            <ion-icon name='leaf' item-start></ion-icon>
+            <ion-label>工具2</ion-label>
+          </button>
+          <ion-item>
+            <ion-toggle color="purple" checked="true" (ionChange)="cutTheme()" ></ion-toggle>
+            <ion-label>
+              夜间模式
+            </ion-label>
+            <ion-icon name='cloudy-night' color="purple" item-start></ion-icon>
+          </ion-item>
+          <button ion-item (click)="goToScanQRCode()" >
+            <ion-icon name='qr-scanner' color="dark" item-start></ion-icon>
+            <ion-label>
+              扫面二维码
+            </ion-label>
+          </button>
+      
+          <!-- <ion-item>
+            <ion-icon name='leaf' item-start></ion-icon>
+            Herbology
+            <ion-icon name='rose' item-end color="secondary"></ion-icon>
+          </ion-item>
+      
+          <ion-item>
+            <ion-icon name='flask' item-start></ion-icon>
+            Potions
+            <ion-note item-end>
+            Poisonous
+            </ion-note>
+          </ion-item> -->
+      
+      </ion-list>
+
+
+      <ion-list>
+
+          <ion-list-header >
+            全局设置
+          </ion-list-header>
+      
+          <ion-item>
+            <ion-toggle checked="false"></ion-toggle>
+            <ion-label>
+              夜间模式
+            </ion-label>
+            <ion-icon name='color-wand' item-start></ion-icon>
+          </ion-item>
+      
+          <button ion-item>
+            <ion-icon name='settings' item-start></ion-icon>
+            设置
+          </button>
+      
+          <button ion-item>
+            <ion-icon name='help-circle' item-start></ion-icon>
+              关于
+            <ion-note item-end>关于该app</ion-note>
+          </button>
+      
+      
+        </ion-list>
+      
+    </div>
+
+  </ion-content>
+  

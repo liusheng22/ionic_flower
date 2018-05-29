@@ -1,0 +1,87 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>确认支付</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <!-- 显示用户收货地址 -->
+  <ion-list>
+      <ion-item>
+        <ion-avatar item-start>
+          <button ion-button clear item-start>
+            <ion-icon name="pin"></ion-icon>
+          </button>
+        </ion-avatar>
+        <h2>{{userInfo.uname}}　　{{userInfo.phone}}</h2>
+        <p>{{userInfo.address}}</p>
+        <button ion-button clear item-end>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </button>
+      </ion-item>
+  </ion-list>
+
+  <!-- 选择支付方式 -->
+  <form (submit)="doSubmit($event)" (click)="doSubmit($event)" [formGroup]="langForm">
+    <ion-list radio-group formControlName="langs">
+      <ion-list-header>
+        选择支付方式:
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>支付宝</ion-label>
+        <ion-radio value="Alipay"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>微信</ion-label>
+        <ion-radio value="wexin"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>不想支付</ion-label>
+        <ion-radio value="nopay" disabled="true"></ion-radio>
+      </ion-item>
+    </ion-list>
+  </form>
+
+  <!-- 展示将要购买的商品信息 -->
+  <ion-list >
+    <ion-item *ngFor="let productInfo of productInfo" >
+      <ion-avatar item-start>
+        <img src="{{productInfo.src}}" alt="">
+      </ion-avatar>
+      <h2>{{productInfo.page_title}}</h2>
+      <p [innerHTML]="productInfo.short_desc" class="introduce" ></p>
+      <p>{{productInfo.pid}}</p>
+      <button ion-button clear item-end>
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-item>
+  </ion-list>
+
+  <!-- 配送方式 -->
+  <!-- interface=>"action-sheet(从下面的弹框)" "popover(普通下拉)" 不用该属性则为confirm弹框    -->
+  <ion-list class="delivery">
+    <ion-item>
+      <ion-label> 配送方式 </ion-label>
+      <ion-select [(ngModel)]="delivery" cancelText="取消" okText="选好了" >
+        <ion-option value="myself">自取</ion-option>
+        <ion-option value="ems">邮政</ion-option>
+        <ion-option value="sf">顺丰</ion-option>
+        <ion-option value="not" disabled="true" >不用给我送了</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <div class="clearing">
+    <div class="total">
+      <span>合计: </span>
+      <b>￥</b>
+      <b class="price_sum">123465</b>
+    </div>
+    <div class="btn_clearing" (click)="goToPay()" >确认结算</div>
+  </div>
+
+</ion-content>

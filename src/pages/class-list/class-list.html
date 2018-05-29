@@ -1,0 +1,63 @@
+<!--
+  Generated template for the ClassListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{cName}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)" >
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="正努力加载中..." >
+
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- 商品推荐 -->
+  <div class="goods_recommend">
+      <!-- <ion-grid> -->
+        <ion-row>
+          <ion-col col-6 text-center *ngFor="let recommend of classList">
+            <div class="product_view">
+              <!-- 商品图片 -->
+              <a  class="product_pic" (press)="showGroupBtn(recommend.pid)" (tap)="showproductDetail(recommend.pid)" >
+                <img src="{{recommend.src}}" alt="">
+              </a>
+              <!-- 商品信息 -->
+              <div class="product_info">
+                <p class="product_info_til">
+                  <a href="{{recommend.href}}" title="{{recommend.page_title}}">{{recommend.page_title}}</a>
+                </p>
+                <a href="{{recommend.href}}" class="product_introduce" title="{{recommend.short_desc}}">
+                  {{recommend.short_desc}}
+                </a>
+                <p class="product_price" > 
+                  <i title="{{recommend.price_min}}" class="product_price_sale">￥{{(recommend.price_min/100).toFixed(2)}}</i>
+                  <s class="product_price_origin" *ngIf="recommend.price_origin" >原价￥{{(recommend.price_origin/100).toFixed(2)}}</s>
+                </p>
+              </div>
+              <!-- 功能组按钮 -->
+              <div class="group_btn" *ngIf="group_isShow == recommend.pid"  >
+                <div class="group_btn_bg" (click)="showGroupBtn('')">
+                  <!-- 显示半透明背景 -->
+                </div>
+                <div class="group_btn_box">
+                  <img src="{{recommend.QR_code}}" *ngIf="QRcode == recommend.QR_code" alt="">
+                  <a *ngFor="let group_btn of group_btn" (tap)="groupBtnFun(group_btn.group_til,recommend.pid,recommend.QR_code)" class="{{group_btn.className}}"  href="{{group_btn.tap_href}}" title="{{group_btn.group_til}}" >
+                    <i><ion-icon name="{{group_btn.tap}}" [color]="group_btn.color"></ion-icon></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      <!-- </ion-grid> -->
+  </div>
+</ion-content>

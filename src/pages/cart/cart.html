@@ -1,0 +1,90 @@
+<!--
+  Generated template for the CartPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>购物车</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div class="changeDelClear">
+    <div class="pickBox">
+      <!-- <ion-checkbox type="checkbox" name="" id="pickAll" (click)="isPickAll(-1)" checked="false" ></ion-checkbox> -->
+      <input type="checkbox" name="" id="pickAll" (click)="isPickAll(-1)" >
+      <label for="pickAll">全选</label>
+    </div>
+    <div class="delBox">
+      <!-- <button ion-button class="del" color="danger"  outline > -->
+      <div class="dels" (click)="delItem()" >
+        <ion-icon name="trash" >{{delBtnName}}</ion-icon>
+      </div>
+      <!-- </button> -->
+    </div>
+  </div>
+
+  <ion-list class="cart_List">
+    <ion-item-sliding *ngFor="let cart of oneselfCart" (ionDrag)="logDrag($event)" (ionSwipe)="delete()"   >
+      <ion-item style="background-image:{{cart.src}}" *ngIf="cart.ifItem" >
+        <ion-avatar item-start >
+          <img src="{{cart.src}}" *ngIf="!cart.pick" (click)="isPick(cart.idx)" >
+          <img src="http://www.laiwenge.com/flower/imgs/right.png" *ngIf="cart.pick" (click)="isPickAll(cart.idx)" >
+        </ion-avatar>
+        <div (tap)="showProductInfo(cart.pid)">
+          <h2>{{cart.page_title}}</h2>
+          <h3 class="introduce" [innerHTML]="cart.short_desc" ></h3>
+          <p>￥{{(cart.price_min/100).toFixed(2)}}</p>
+        </div>
+        <span class="chooese_tools">
+          <b class="minus" (click)="addOrMinus(cart.pid,false)" >-</b>
+          <!-- <span class="txt_num" (click)="customNum(cart.pid)" >{{cart.p_count}}</span> -->
+          <span class="txt_num" >{{cart.p_count}}</span>
+          <b class="add"  (click)="addOrMinus(cart.pid,true)" >+</b>
+        </span>
+      </ion-item>
+    
+      <ion-item-options side="right" icon-start >
+        <button ion-button (click)="delItem(cart.idx)">
+          <ion-icon name="trash"></ion-icon>
+          这个不要了
+        </button>
+      </ion-item-options>
+      
+      <ion-item-options side="left">
+        <button ion-button (click)="isPick(cart.idx)">
+          <ion-icon name="checkmark-circle"></ion-icon>
+          这个我要
+        </button>
+      </ion-item-options>
+
+
+    <!-- <ion-item-options >
+      <button ion-button (click)="noclose(item100)">
+        <ion-icon name="cart"></ion-icon>
+      </button>
+      <button ion-button icon-only color="danger" (click)="unread(item100)">
+        <ion-icon name="trash"></ion-icon>
+      </button>
+      <button ion-button icon-only (click)="unread(item100)">
+        <ion-icon name="star"></ion-icon>
+      </button>
+    </ion-item-options> -->
+
+    </ion-item-sliding>
+  </ion-list>
+
+  <div class="clearing">
+    <div class="total">
+      <span>合计: </span>
+      <b>￥</b>
+      <b class="price_sum">{{initPrice.toFixed(2)}}</b>
+    </div>
+    <div class="btn_clearing" (click)="goToPay()" >确认结算</div>
+  </div>
+</ion-content>
