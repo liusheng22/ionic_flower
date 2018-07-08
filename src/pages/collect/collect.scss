@@ -1,0 +1,134 @@
+page-collect {
+    // 顶部
+    .changeDelClear{
+        height: 50px;
+    }
+    .changeDelClear>div.pickBox{
+        display: inline-block;
+        margin-left: 1em;
+        margin-top: 10px;
+    }
+    .changeDelClear>div.delBox{
+        display: inline-block;
+        width: 65px;
+        height: 30px;
+    }
+    .dels{
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        border: 1px solid red;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 30px;
+        border-radius: 5px;
+        margin-left: 1em;
+        cursor: pointer;
+    }
+    #pickAll{
+        width: 30px;
+        height: 30px;
+        vertical-align: middle;
+    }
+
+    .list .item {
+        padding: 0;
+        padding-left: 10px;
+    }
+    .list .item ion-avatar{
+        width: 60px;
+        height: 60px;
+        position: relative;
+    }
+    .list .item ion-avatar img{
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+    ion-label h2 {
+        margin-top: 0px !important;
+    }
+    .introduce{
+        overflow: hidden;
+        display: inline-block;
+        height: 20px;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+    }
+    .chooese_tools{
+        height: 20px;
+        display: inline-block;
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
+    .chooese_tools b{
+        display: inline-block;
+        border: 1px solid #efeaea;
+        // background-color: #efeaea;
+        background-color: #fff;
+        text-align: center;
+        width: 20px;
+        height: 100%;
+        padding: 0px;
+        cursor: pointer;
+    }
+    .txt_num{
+        display: inline-block;
+        height: 100%;
+        width:30px;
+        text-align: center;
+        vertical-align: middle;
+        cursor: text;
+    }
+    .cart_List{
+        margin-bottom: 50px;
+    }
+
+    // 购物车底部结算
+    .clearing{
+        position: fixed;
+        width: 100%;
+        height: 40px;
+        bottom: 60px;
+        left: 0px;
+    }
+    .total{
+        display: inline-block;
+        position: absolute;
+        left: 60px;
+        bottom: 0px;
+        margin-bottom: 5px;
+        height: 35px;
+        line-height: 35px;
+        vertical-align: middle;
+    }
+    .total>b{
+        display: inline-block;
+        color: orangered;
+        font-size: 1.4em;
+    }
+    .btn_clearing{
+        position: absolute;
+        right: 20px;
+        bottom: 0px;
+        display: inline-block;
+        width: 100px;
+        height: 35px;
+        line-height: 35px;
+        background: #f40;
+        text-align: center;
+        color: #dfd6d6;
+        font-family: 'Lantinghei SC','Microsoft Yahei';
+        font-size: 1.3em;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        border-radius: 2px;
+        text-decoration: none;
+        cursor: pointer;
+        margin-bottom: 5px;
+    }
+}

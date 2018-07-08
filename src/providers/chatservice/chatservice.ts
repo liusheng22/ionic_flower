@@ -26,11 +26,12 @@ export class UserInfo {
 export class ChatserviceProvider {
 
   constructor(public res : Http , public event : Events) {
-    console.log('Hello ChatserviceProvider Provider');
+    // console.log('Hello ChatserviceProvider Provider');
   }
 
   /**
-   * 从 json 中获取模拟数据
+   * 获取消息列表
+   * 从 API 获取 或者从 json 中获取模拟数据
    * 
    * @returns {Promise<ChatMessage[]>} 
    * @memberof ChatserviceProvider
@@ -60,14 +61,14 @@ export class ChatserviceProvider {
       userImgUrl : 'http://img.mukewang.com/user/57a322f00001e4ae02560256-40-40.jpg' ,
       toUserId : message.userId ,
       time : Date.now() ,
-      message : '你刚刚给我发送了 : [' + message.message + ']?' ,
+      message : '你刚刚给我发送了 :『 ' + message.message + ' 』?' ,
       status : 'success'
     }
 
     setTimeout(() => {
       //在 event 中定义一个 chat.message ，一旦发生变化，便发布出去，并传递其值 messageSend
       this.event.publish('chat.received' , messageSend , Date.now())
-    }, 1000);
+    }, Math.random() * 1000);
   }
 
   sendMessage(message : ChatMessage){

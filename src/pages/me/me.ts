@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, NavParams, ModalController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, ModalController, LoadingController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { Storage } from '@ionic/storage'
 import { BaseUi } from '../../common/baseui';
@@ -7,6 +7,10 @@ import { RestProvider } from '../../providers/rest/rest';
 import { UserPage} from '../../pages/user/user';
 import { SettingProvider } from '../../providers/setting/setting';
 import { ScanPage } from '../../pages/scan/scan';
+import { VersionsPage } from '../../pages/versions/versions';
+import { CartPage } from '../cart/cart';
+import { CollectPage } from '../collect/collect';
+import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker'
 
 @Component({
   selector: 'page-me',
@@ -26,7 +30,9 @@ export class MePage extends BaseUi {
     public loadCtrl: LoadingController,
     public rest: RestProvider,
     public settings : SettingProvider ,
-    public storage: Storage) {
+    public storage: Storage,
+    public locationTracker : LocationTrackerProvider
+  ) {
       super() ;
       this.settings.getActiveTheme().subscribe(val=>{
         this.selectTheme = val;
@@ -35,6 +41,7 @@ export class MePage extends BaseUi {
 
   ionViewDidEnter() {  //生命周期 => 页面加载完之后
     this.loadUserPage();
+    this.locationTracker.startTracking() ;
   }
 
   loadUserPage() {
@@ -82,6 +89,18 @@ export class MePage extends BaseUi {
 
   goToScanQRCode(){
     this.navCtrl.push(ScanPage,null,{'animate':false})
+  }
+
+  goToShoppingCart(){
+    this.navCtrl.push(CartPage,null,{'animate':false})
+  }
+
+  goToCollect(){
+    this.navCtrl.push(CollectPage,null,{'animate':false})
+  }
+
+  goToVersions(){
+    this.navCtrl.push(VersionsPage)
   }
 
 }

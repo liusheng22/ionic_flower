@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , LoadingController, ToastController, ActionSheetController, Platform, AlertController} from 'ionic-angular';
-import { CommentPage } from '../comment/comment'
 import { Storage } from '@ionic/storage'
 import { RestProvider } from '../../providers/rest/rest';
 import { BaseUi } from '../../common/baseui';
 import { RegisterPage } from '../register/register';
 import {FormGroup,FormControl} from '@angular/forms';
-import { HomePage } from '../home/home'
 import { AddAddressPage } from '../add-address/add-address'
 
 @IonicPage()

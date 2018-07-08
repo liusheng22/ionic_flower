@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar>
       <ion-title>
-        Me
+        我的
       </ion-title>
     </ion-navbar>
   </ion-header>
@@ -45,41 +45,20 @@
             我的工具
           </ion-list-header>
       
-          <button ion-item  >
-            <ion-icon name='planet' item-start></ion-icon>
-            <ion-label>工具1</ion-label>
+          <button ion-item (click)="goToShoppingCart()" > 
+            <ion-icon name='cart' color="primary" item-start ></ion-icon>
+            <ion-label>我的购物车</ion-label>
           </button>
-          <button ion-item  >
-            <ion-icon name='leaf' item-start></ion-icon>
-            <ion-label>工具2</ion-label>
+          <button ion-item (click)="goToCollect()" >
+            <ion-icon name='heart' color="danger" item-start></ion-icon>
+            <ion-label>我的收藏</ion-label>
           </button>
-          <ion-item>
-            <ion-toggle color="purple" checked="true" (ionChange)="cutTheme()" ></ion-toggle>
-            <ion-label>
-              夜间模式
-            </ion-label>
-            <ion-icon name='cloudy-night' color="purple" item-start></ion-icon>
-          </ion-item>
           <button ion-item (click)="goToScanQRCode()" >
             <ion-icon name='qr-scanner' color="dark" item-start></ion-icon>
             <ion-label>
               扫面二维码
             </ion-label>
           </button>
-      
-          <!-- <ion-item>
-            <ion-icon name='leaf' item-start></ion-icon>
-            Herbology
-            <ion-icon name='rose' item-end color="secondary"></ion-icon>
-          </ion-item>
-      
-          <ion-item>
-            <ion-icon name='flask' item-start></ion-icon>
-            Potions
-            <ion-note item-end>
-            Poisonous
-            </ion-note>
-          </ion-item> -->
       
       </ion-list>
 
@@ -91,11 +70,11 @@
           </ion-list-header>
       
           <ion-item>
-            <ion-toggle checked="false"></ion-toggle>
+            <ion-toggle color="purple" checked="false" (ionChange)="cutTheme()" ></ion-toggle>
             <ion-label>
               夜间模式
             </ion-label>
-            <ion-icon name='color-wand' item-start></ion-icon>
+            <ion-icon name='cloudy-night' color="purple" item-start></ion-icon>
           </ion-item>
       
           <button ion-item>
@@ -103,8 +82,8 @@
             设置
           </button>
       
-          <button ion-item>
-            <ion-icon name='help-circle' item-start></ion-icon>
+          <button ion-item (click)="goToVersions()" >
+            <ion-icon name='help-circle' color="secondary" item-start></ion-icon>
               关于
             <ion-note item-end>关于该app</ion-note>
           </button>

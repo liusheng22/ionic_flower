@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, IonicPage, NavParams, ModalController, LoadingController , ToastController, ViewController , Content, TextInput, Events } from 'ionic-angular';
-import { LoginPage } from '../login/login';
+import { IonicPage, NavParams, ModalController, LoadingController , ToastController, ViewController , Content, TextInput, Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage'
 import { BaseUi } from '../../common/baseui';
 import { ChatserviceProvider, ChatMessage } from '../../providers/chatservice/chatservice'
@@ -39,30 +38,28 @@ export class ChatdetailsPage extends BaseUi {
       super();
       this.chatUserName = this.navparams.get('username');
       this.chatUserUid = this.navparams.get('userid');
-      console.log(this.chatUserName , this.chatUserUid)
   }
 
   ionViewDidLoad() {
-    // this.chatUserName = this.navParams.get('username');
+    this.rest.hideTabs();
   }
 
-  ionViewDidEnter(){
+  ionViewDidEnter(){  //页面渲染前，开始调用消息
+    // this.rest.hideTabs();
+
     this.storage.get("userId").then((val) => {
-      if(val) { //验证是否登陆,如果用户登录了,加载 商品信息
+      if(val) { //验证是否登陆,如果用户登录了,加载 用户信息
         this.rest.getUserInfo(val)
           .subscribe(res=>{
-            // var loading = this.showLoading(this.loadCtrl , "不要着急,加载中...");
             this.uid = res['userId'];
             this.uname = res['nickname'];
-            this.userImgUrl = res['avatar_url'];
-            //loading.dismiss()
+            this.userImgUrl = "http://www.laiwenge.com/flower/imgs/avatar/" + res["avatar"];
           },
         error => this.errorMessage = <any>error)
       }
     })
 
-    this.getMessages()
-      .then(()=>{
+    this.getMessages().then(()=>{ //调用完聊天信息后，将滚动条滚动到最底端
         this.scrollToBottom();
       })
 
@@ -75,6 +72,8 @@ export class ChatdetailsPage extends BaseUi {
   }
 
   ionViewWillLeave(){
+    this.rest.showTabs();
+
     this.event.unsubscribe('chat.received') ;
   }
 
@@ -102,11 +101,11 @@ export class ChatdetailsPage extends BaseUi {
 
   getMessageIndex(id : string){  //通过 id 获得index
     //判断其中 messageId 和 传来的 id 一致性是否存在
-    return this.messageList.findIndex(e=>e.messageId === id)
+    return this.messageList.findIndex(e=>e.messageId === id)  //用法: e 循环 messageList 中每一项 messageId 与 id做对比，取第一个index
   }
 
   sendMessage(){
-    if(!this.editorMessage.trim()){
+    if(!this.editorMessage.trim()){ //如果消息为空，则不发送(去掉空格进行判断)
       return ;
     }
 
@@ -122,10 +121,10 @@ export class ChatdetailsPage extends BaseUi {
       status : 'pending'
     }
 
-    this.messageList.push(messageSend);
+    this.messageList.push(messageSend); //消息对象 入栈 数组
     this.scrollToBottom();
     
-    this.editorMessage = '';
+    this.editorMessage = '';  //发送完消息，输入框为空
 
     if(!this.isOpenEmojiPicker){  //聊天窗口是否打开
       this.messageInput.setFocus(); //是 => 消息聊天输入框获得焦点
@@ -135,7 +134,7 @@ export class ChatdetailsPage extends BaseUi {
     this.chatServiceProvider.sendMessage(messageSend)
       .then(()=>{
         let index = this.getMessageIndex(id) ;
-        if(index == -1){
+        if(index !== -1){
           this.messageList[index].status = 'success' ;
         }
       })

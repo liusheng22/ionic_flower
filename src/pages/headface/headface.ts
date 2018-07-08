@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, normalizeURL, NavController, NavParams, ActionSheetController, ModalController, LoadingController, Platform, ToastController, ViewController } from 'ionic-angular';
+import { normalizeURL, NavController, NavParams, ActionSheetController, ModalController, LoadingController, Platform, ToastController, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage'
 import { BaseUi } from '../../common/baseui';
 import { RestProvider } from '../../providers/rest/rest';

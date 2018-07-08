@@ -1,17 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams , ViewController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams , ViewController, LoadingController, ToastController } from 'ionic-angular';
 import { BaseUi } from '../../common/baseui';
 import { RestProvider } from '../../providers/rest/rest';
 import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { RegisterPage } from '../register/register';
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { LocationTrackerProvider } from '../../providers/location-tracker/location-tracker'
 
 @Component({
   selector: 'page-login',
@@ -37,12 +31,17 @@ export class LoginPage extends BaseUi{
     public rest : RestProvider ,
     public toastCtrl : ToastController ,
     public geolocation : Geolocation ,
-    public storage : Storage ) {
+    public storage : Storage ,
+    public locationTracker : LocationTrackerProvider ) {
       super()   //调用父类的构造函数
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+    // console.log('ionViewDidLoad LoginPage');
+  }
+
+  ionViewDidEnter(){
+    this.locationTracker.startTracking() ;
   }
 
   /**
@@ -55,23 +54,27 @@ export class LoginPage extends BaseUi{
   }
 
   async login(){
-    await this.geolocation.getCurrentPosition()
-      .then(resp => {  //获得用户 定位 经纬度
-        console.log(resp)
-          this.latitude = resp.coords.latitude
-          this.longitude = resp.coords.longitude
-      }).catch(error => {
-        console.log('Error getting location : ', error);
-      })
+    // await this.geolocation.getCurrentPosition()
+    //   .then(resp => {  //获得用户 定位 经纬度
+    //     console.log(resp)
+    //       this.latitude = resp.coords.latitude
+    //       this.longitude = resp.coords.longitude
+    //   }).catch(error => {
+    //     console.log('Error getting location : ', error);
+    //   })
+    
+    // let watch = this.geolocation.watchPosition();
+    //   watch.subscribe(data => { //持续获得用户定位
+    //       this.conLatitude = data.coords.latitude
+    //       this.conLongitude = data.coords.longitude
+    //   });
 
-    let watch = this.geolocation.watchPosition();
-      watch.subscribe(data => { //持续获得用户定位
-          this.conLatitude = data.coords.latitude
-          this.conLongitude = data.coords.longitude
-      });
-
+    this.locationTracker.startTracking() ;  //获得定位
+    this.latitude = this.locationTracker.lat;
+    this.longitude = this.locationTracker.lng;
+    
     var loading = super.showLoading(this.loadingCtrl , "登录中...")
-
+    
     this.rest.login(this.mobile , this.password , this.latitude , this.longitude)
           .subscribe(
             f => {

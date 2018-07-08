@@ -30,7 +30,7 @@
   </div>
 
   <ion-list class="cart_List">
-    <ion-item-sliding *ngFor="let cart of oneselfCart" (ionDrag)="logDrag($event)" (ionSwipe)="delete()"   >
+    <ion-item-sliding *ngFor="let cart of oneselfCart" >
       <ion-item style="background-image:{{cart.src}}" *ngIf="cart.ifItem" >
         <ion-avatar item-start >
           <img src="{{cart.src}}" *ngIf="!cart.pick" (click)="isPick(cart.idx)" >

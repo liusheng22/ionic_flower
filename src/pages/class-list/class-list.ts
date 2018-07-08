@@ -1,11 +1,9 @@
 import { Component ,ElementRef  } from '@angular/core';
-import { App, Events ,NavController , NavParams , IonicPage , GestureController, LoadingController, ToastController  } from 'ionic-angular';
-import { SignUpPage } from '../sign/sign-up';
+import { NavController , NavParams , IonicPage , LoadingController, ToastController  } from 'ionic-angular';
 import { Storage } from '@ionic/Storage'
 import { RestProvider } from '../../providers/rest/rest';
 import { BaseUi } from '../../common/baseui';
 import { RegisterPage } from '../register/register';
-import { MyApp } from '../../app/app.component';
 import { ProductdetailPage } from '../../pages/productdetail/productdetail'
 
 @IonicPage()
@@ -113,7 +111,6 @@ export class ClassListPage extends BaseUi {
     public loadCtrl : LoadingController,
     public toastCtrl : ToastController,
     public storage : Storage,
-    private event: Events, 
     public rest : RestProvider) {
       super();
   }

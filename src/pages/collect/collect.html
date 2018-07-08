@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的收藏</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list class="cart_List">
+      <ion-item-sliding *ngFor="let cart of oneselfCart"  >
+        <ion-item style="background-image:{{cart.src}}" *ngIf="cart.ifItem" >
+          <ion-avatar item-start >
+            <img src="{{cart.src}}" *ngIf="!cart.pick" (click)="isPick(cart.idx)" >
+            <img src="http://www.laiwenge.com/flower/imgs/right.png" *ngIf="cart.pick" (click)="isPickAll(cart.idx)" >
+          </ion-avatar>
+          <div (tap)="showProductInfo(cart.pid)">
+            <h2>{{cart.page_title}}</h2>
+            <h3 class="introduce" [innerHTML]="cart.short_desc" ></h3>
+            <p>￥{{(cart.price_min/100).toFixed(2)}}</p>
+          </div>
+        </ion-item>
+
+        <!-- 左滑 -->
+        <ion-item-options side="right" icon-start >
+          <button ion-button (click)="delItem(cart.idx)">
+            <ion-icon name="trash"></ion-icon>
+            这个不要了
+          </button>
+        </ion-item-options>
+        <!-- 右滑 -->
+        <ion-item-options side="left">
+          <button ion-button (click)="addCart(cart.idx)">
+            <ion-icon name="cart"></ion-icon>
+            加入购物车
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+</ion-content>

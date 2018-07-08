@@ -1,5 +1,4 @@
-import { Loading, LoadingController, ToastCmp, ToastController ,Toast , AlertController ,Alert} from 'ionic-angular'
-import { LoadedModule } from 'ionic-angular/util/module-loader';
+import { Loading, LoadingController, ToastController ,Toast , AlertController ,Alert} from 'ionic-angular'
 
 
 /**

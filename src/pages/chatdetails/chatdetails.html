@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>chatdetails</ion-title>
+    <ion-title>{{chatUserName}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -9,7 +9,6 @@
     <div class="message" *ngFor="let m of messageList" [class.left]="m.userId === chatUserUid" [class.right]="m.userId === uid" >
       <img [src]="m.userImgUrl" class="user-img" alt="">
       <ion-spinner name="dots" *ngIf="m.status === 'pending'" ></ion-spinner>
-      <p>{{m.status}}</p>
       <div class="msg-detail">
         <div class="msg-info">
           <p>{{m.userName}}&nbsp;{{m.time | relativetime}}</p>

@@ -1,9 +1,8 @@
 import { Component, forwardRef  } from '@angular/core';
 import { ControlValueAccessor , NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EmojiProvider } from '../../providers/emoji/emoji'
-// import { fromPromise } from 'rxjs/observable/fromPromise';
 import { ViewChild } from '@angular/core';
-import { Slides , Slide, IonicPage } from 'ionic-angular';
+import { Slides } from 'ionic-angular';
 
 //实现 EmojipickerComponent 的 providers
 export const EMOJI_ACCESSOR : any = {
@@ -44,8 +43,11 @@ export class EmojipickerComponent implements ControlValueAccessor {
 
   //再次处理新的内容赋值 以及函数的绑定
   setValue(val : any) : any {
-    this.content += val ;
-    if(this.content){
+    if(!this.content){
+      this.content = val ;
+      this.onChanged(this.content)
+    }else{
+      this.content += val ;
       this.onChanged(this.content)
     }
   }

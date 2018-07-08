@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams , LoadingController, ToastControlle
 import { Storage } from '@ionic/storage'
 import { RestProvider } from '../../providers/rest/rest';
 import { BaseUi } from '../../common/baseui';
-import { RegisterPage } from '../register/register';
 
 @IonicPage()
 @Component({

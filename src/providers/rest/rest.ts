@@ -1,5 +1,4 @@
 import { Observable } from 'rxjs/Rx'
-// import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map'
@@ -13,10 +12,9 @@ import 'rxjs/add/operator/catch'
 */
 @Injectable()
 export class RestProvider {
-  ip = 'http://127.0.0.1'; 
-  // ip = 'http://10.172.246.85';  //公司
+  // ip = 'http://127.0.0.1';  //本地
   // ip = 'http://192.168.1.112';  //家里
-  // ip = 'http://www.laiwenge.com';  //服务器
+  ip = 'http://www.laiwenge.com';  //服务器
 
   constructor(public http: Http) {
     // console.log('Hello RestProvider Provider');
@@ -24,30 +22,6 @@ export class RestProvider {
 
   
   //后端数据API
-  //feed
-  private apiUrlFeeds = 'https://imoocqa.gugujiankong.com/api/feeds/get';
-
-  //account
-  // private apiUrlRegister = 'https://imoocqa.gugujiankong.com/api/account/register';
-  // private apiUrlLogin = 'https://imoocqa.gugujiankong.com/api/account/login';
-  // private apiUrlUserInfo = 'https://imoocqa.gugujiankong.com/api/account/userinfo';
-  // private apiUrlUpdateNickName = 'https://imoocqa.gugujiankong.com/api/account/updatenickname';
-  private apiGetUserQuestionList = "https://imoocqa.gugujiankong.com/api/account/getuserquestionlist";
-
-  //question
-  private apiUrlQuestionSave = 'https://imoocqa.gugujiankong.com/api/question/save';
-  private apiUrlQuestionList = 'https://imoocqa.gugujiankong.com/api/question/list?index=1&number=10';
-  private apiUrlGetQuestion = "https://imoocqa.gugujiankong.com/api/question/get";
-  private apiUrlGetQuestionWithUser = "https://imoocqa.gugujiankong.com/api/question/getwithuser";
-  private apiUrlAnswer = "https://imoocqa.gugujiankong.com/api/question/answer";
-  private apiUrlSaveFavourite = "https://imoocqa.gugujiankong.com/api/question/savefavourite";
-
-  //notification
-  private apiUrlUserNotifications = "https://imoocqa.gugujiankong.com/api/account/usernotifications";
-  //后端数据API-end
-
-
-  //自己的API
     //user
     private apiUrlRegister = this.ip + '/flower/api/user/register.php';
     private apiUrlLogin = this.ip + '/flower/api/user/login.php';
@@ -65,6 +39,7 @@ export class RestProvider {
     private apiUrlProductList = this.ip + '/flower/api/product/productList.php';
     private apiUrlProductInfo = this.ip + '/flower/api/product/productInfo.php';
     private apiUrlProductImgList = this.ip + '/flower/api/product/productImgList.php';
+    private apiUrlProductLike = this.ip + '/flower/api/product/productLike.php';
     private apiUrlAddToLike = this.ip + '/flower/api/product/addToLike.php';
     private apiUrlIsLikeAndCollectStatus = this.ip + '/flower/api/product/isLikeAndCollectStatus.php'
     
@@ -80,6 +55,7 @@ export class RestProvider {
     private apiUrlUpdateCartProductStatus = this.ip + '/flower/api/cart/updateCarProductStatus.php'
     private apiUrlGetCart = this.ip + '/flower/api/cart/getCart.php'
     private apiUrlIsCartAndCollectStatus = this.ip + '/flower/api/cart/isCartAndCollectStatus.php'
+  //后端数据API-end
 
   /**
    * 根据用户的手机号码和密码进行登录
@@ -107,6 +83,10 @@ export class RestProvider {
    */
   register(mobile, nickname, password, gender): Observable<string[]> {
     return this.getUrlReturn(this.apiUrlRegister + "?phone=" + mobile + "&nickname=" + nickname + "&upwd=" + password +"&gender=" +gender);
+  }
+
+  headface(uid , imgs):Observable<string[]>{
+    return this.getUrlReturn(this.apiUrlHeadface + "?uid=" + uid + "&imgs=" + imgs);
   }
 
   address(uid, address, add, update): Observable<string[]> {
@@ -139,6 +119,10 @@ export class RestProvider {
 
   productInfo( pid ):Observable<string[]>{
     return this.getUrlReturn(this.apiUrlProductInfo + "?pid=" + pid)
+  }
+
+  productLike( uid ):Observable<string[]>{
+    return this.getUrlReturn(this.apiUrlProductLike + "?userId=" + uid)
   }
 
   productImgList( pid ):Observable<string[]>{

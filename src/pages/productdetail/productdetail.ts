@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams , LoadingController, ToastController} from 'ionic-angular';
+import { NavController, NavParams , LoadingController, ToastController} from 'ionic-angular';
 import { CommentPage } from '../comment/comment'
 import { Storage } from '@ionic/storage'
 import { RestProvider } from '../../providers/rest/rest';
 import { BaseUi } from '../../common/baseui';
 import { RegisterPage } from '../register/register';
-import { PayPage } from '../pay/pay';
 import { CartPage } from '../cart/cart';
 
 // @IonicPage()

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage, NavParams, ModalController, LoadingController , ToastController, ViewController } from 'ionic-angular';
-import { LoginPage } from '../login/login';
+import { NavController, NavParams, ModalController, LoadingController , ToastController, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage'
 import { BaseUi } from '../../common/baseui';
 import { RestProvider } from '../../providers/rest/rest';
@@ -21,17 +20,17 @@ import { HeadfacePage } from '../headface/headface'
 export class UserPage extends BaseUi{
   
   // headface : string = "http://10.172.246.85/flower/imgs/avatar/emoji/emoji_1.jpg?";
-  headface : string = "http://www.laiwenge.com/imgs/avatar/emoji/emoji_1.jpg?";
+  headface : string = "http://www.laiwenge.com/flower/imgs/avatar/emoji/emoji_1.jpg?";
   nickname : string = "加载中...";
+  gender : string ;
   phone : string ;
-  vipName : string ;
-  vipIcon : string ;
-  credits : string ;
-  discount : string ;
   email : string ;
   address : string ;
-  gender : string ;
-  uname : string ;
+  vipName : string ;
+  vipIcon : string ;
+  credits : string ;  //积分
+  discount : string ; //折扣
+  uname : string ;  //真实姓名
 
   errorMessage : any;
 
@@ -47,7 +46,11 @@ export class UserPage extends BaseUi{
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad UserPage');
+    this.rest.hideTabs();
+  }
+
+  ionViewWillLeave(){
+    this.rest.showTabs();
   }
 
   ionViewDidEnter() {  //生命周期 => 页面加载完之后
@@ -56,13 +59,11 @@ export class UserPage extends BaseUi{
 
   loadUserPage() {
     this.storage.get("userId").then((val) => {
-      if (!val) {
+      if (val) {
         //如果用户登录了,加载用户数据
         var loading = super.showLoading(this.loadCtrl, "加载中...")
         this.rest.getUserInfo(val)
-          .subscribe(userinfo => {  //加载成功
-            console.log(this.nickname);
-            console.log(this.headface);
+          .subscribe(userinfo => {  //加载成功  
             
             this.nickname = userinfo["nickname"];
             // this.headface = "http://127.0.0.1/flower/imgs/avatar/" + userinfo["avatar"] + ".jpg";
@@ -84,7 +85,7 @@ export class UserPage extends BaseUi{
     })
   }
 
-  updateNickName(){//更新用户昵称
+  updateNickName(){//更新用户昵称等信息
     this.storage.get('userId').then((val) => {
       if (val != null) {
         var loading = super.showLoading(this.loadCtrl, "修改中...");

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams , LoadingController, ToastController, ActionSheetController, Platform, AlertController} from 'ionic-angular';
-import { CommentPage } from '../comment/comment'
 import { Storage } from '@ionic/storage'
 import { RestProvider } from '../../providers/rest/rest';
 import { BaseUi } from '../../common/baseui';
@@ -8,13 +7,6 @@ import { RegisterPage } from '../register/register';
 import { PayPage } from '../pay/pay';
 import { HomePage } from '../home/home'
 import { ProductdetailPage } from '../productdetail/productdetail'
-
-/**
- * Generated class for the CartPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -69,7 +61,6 @@ export class CartPage extends BaseUi {
   // }
 
   loadOneselfCart(uid){
-    console.log(uid)
     this.rest.getCart(uid).subscribe( res=>{
       console.log(res);
       res.forEach((v,i)=>{
@@ -79,14 +70,6 @@ export class CartPage extends BaseUi {
       })
       this.oneselfCart = res;
     }, error => this.errorMessage = <any>error)
-  }
-
-  logDrag(eve){
-    console.log(eve)
-  }
-
-  delete(){
-    console.log('删除某个项目')
   }
 
   clearing(){ //结算价格

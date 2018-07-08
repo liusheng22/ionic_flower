@@ -1,15 +1,11 @@
 import { Component ,ElementRef  } from '@angular/core';
-import { App, Events ,NavController , NavParams , IonicPage , GestureController, LoadingController, ToastController  } from 'ionic-angular';
+import { Events ,NavController , NavParams , LoadingController, ToastController  } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
-import { SignUpPage } from '../sign/sign-up';
 import { Storage } from '@ionic/Storage'
 import { RestProvider } from '../../providers/rest/rest';
 import { BaseUi } from '../../common/baseui';
-import { RegisterPage } from '../register/register';
-import { MyApp } from '../../app/app.component'
 import { ProductdetailPage } from '../../pages/productdetail/productdetail'
 import { ClassListPage } from '../../pages/class-list/class-list'
-import { Geolocation } from '@ionic-native/geolocation'
 // import {Gesture} from 'ionic-angular/gestures/gesture';
 
 @Component({
@@ -133,8 +129,6 @@ export class HomePage extends BaseUi{
     private keyboard: Keyboard,
     public rest : RestProvider) {
       super();
-      this.test();
-
       // let tabs = document.querySelectorAll('.tabbar');
       // if ( tabs !== null ) {
       //   Object.keys(tabs).map((key) => {
@@ -149,12 +143,8 @@ export class HomePage extends BaseUi{
       // });
   }
 
-  test(){
-    console.log(123)
-  }
-
   ionViewDidEnter() {  //生命周期 => 页面加载完之后
-    console.log("页面加载完之后")
+    // console.log("页面加载完之后")
   }
 
   getRandomArrayElements(arr, count) {  //数组中随机取出若干数
@@ -308,7 +298,7 @@ export class HomePage extends BaseUi{
   }
 
   goToClassList(className){  //进入花品不同类别
-    // this.navCtrl.push(ClassListPage,{cName:className,uid:this.uid})
+    this.navCtrl.push(ClassListPage,{cName:className,uid:this.uid})
   }
 
     // this.elem =  this.el.nativeElement.querySelector('.product_pic')

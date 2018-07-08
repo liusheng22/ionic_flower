@@ -1,6 +1,5 @@
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
-import { ReturnStatement } from '@angular/compiler';
 
 /*
   Generated class for the EmojiProvider provider.

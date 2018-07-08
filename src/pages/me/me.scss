@@ -7,4 +7,12 @@ page-me{
     .marginTop{
         margin-top: 10px;
     }
+
+    .list-md + ion-list ion-list-header {
+        margin-top: 0px !important;
+    }
+
+    .list-header-md {
+        margin-bottom: 0px !important;
+    }
 }

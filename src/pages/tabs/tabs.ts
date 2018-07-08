@@ -1,7 +1,7 @@
 import { Component, ElementRef, Renderer, ViewChild } from '@angular/core';
-import { App , Events, Tabs  } from 'ionic-angular'
+import { Events, Tabs , Platform } from 'ionic-angular'
 
-import { AboutPage } from '../about/about';
+import { BackbuttonProvider } from '../../providers/backbutton/backbutton';
 import { CartPage } from '../cart/cart';
 import { HomePage } from '../home/home';
 import { MePage } from '../me/me';
@@ -20,7 +20,16 @@ export class TabsPage {
   tab3Root = CartPage;
   tab4Root = MePage;
 
-  constructor(private app : App , private elementRef: ElementRef, private renderer: Renderer, private event: Events) {
+  constructor(
+    private elementRef: ElementRef, 
+    private renderer: Renderer, 
+    private event: Events , 
+    private platform : Platform,
+    public backbutton : BackbuttonProvider
+  ){
+    this.platform.ready().then(() => {
+      this.backbutton.registerBackButtonAction(this.tabRef);
+    });
   }
   
   ionViewDidLoad() {

@@ -19,13 +19,8 @@
 
 </ion-header>
 
-
 <ion-content padding>
   <ion-list >
-    <!-- <ion-item *ngFor="let v of formName " >
-      <ion-label stacked > {{v.til[0]}} </ion-label>
-      <input [type]="{{v.type[0]}}">
-    </ion-item> -->
     <ion-item >
         <ion-label stacked>手机号</ion-label>
         <ion-input type="text" [(ngModel)]="mobile" ></ion-input>
@@ -38,16 +33,6 @@
   </ion-list>
   <div padding>
     <button ion-button color="primary" block  (click)="login()" >登 录</button>
-  </div>
-  <div padding>
-    <ion-input type="text" [(ngModel)]="latitude" ></ion-input>
-    <ion-input type="text" [(ngModel)]="longitude" ></ion-input>
-    <br>
-    <ion-input type="text" [(ngModel)]="data1" ></ion-input>
-    <ion-input type="text" [(ngModel)]="data2" ></ion-input>
-    <br>
-    <div>{{res}}</div>
-    <pre>{{ res | json}}</pre>
   </div>
   <div padding text-center>
     <button ion-button color="primary" outline (click)="registerPage()" >没有账号? 注册</button>
