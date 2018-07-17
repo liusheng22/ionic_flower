@@ -6,6 +6,7 @@ import { RestProvider } from '../../providers/rest/rest';
 import { BaseUi } from '../../common/baseui';
 import { RegisterPage } from '../register/register';
 import { CartPage } from '../cart/cart';
+import  { PayPage } from '../pay/pay'
 
 // @IonicPage()
 @Component({
@@ -25,7 +26,6 @@ export class ProductdetailPage extends BaseUi {
   comment_color : string;
   tabbarElem : any;
   scrollContent : any;
-  fixedContent : any;
 
   constructor(
     public navCtrl: NavController,
@@ -157,7 +157,7 @@ export class ProductdetailPage extends BaseUi {
   }
 
   goToBuy(){
-    this.navCtrl.push(CommentPage,{uid:this.uid,pid:this.pid});
+    this.navCtrl.push(PayPage,{uid:this.uid,pid:[this.pid]});
   }
 
   

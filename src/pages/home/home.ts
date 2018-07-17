@@ -6,6 +6,7 @@ import { RestProvider } from '../../providers/rest/rest';
 import { BaseUi } from '../../common/baseui';
 import { ProductdetailPage } from '../../pages/productdetail/productdetail'
 import { ClassListPage } from '../../pages/class-list/class-list'
+import { SearchPage } from '../../pages/search/search'
 // import {Gesture} from 'ionic-angular/gestures/gesture';
 
 @Component({
@@ -207,7 +208,7 @@ export class HomePage extends BaseUi{
   }
 
   getRecommend(flowerName){ //分别加载 "鲜花" 和 "永生花" 的推荐商品
-    this.rest.recommend(flowerName)
+    this.rest.recommend(flowerName,1)
           .subscribe(product => {  //加载 商品分类信息
             console.log(product)
             if(flowerName == "鲜花"){
@@ -260,6 +261,10 @@ export class HomePage extends BaseUi{
         // });
       }
     })
+  }
+
+  goToSearch(){
+    this.navCtrl.push(SearchPage)
   }
 
   isHasAddTo(btnFunName){ //判断该用户 对该 是否已 收藏 或 

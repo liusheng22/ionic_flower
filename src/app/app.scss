@@ -39,4 +39,15 @@
 //         }
 //     }
 // }
-  
+
+.header-md::after, .tabs-md[tabsPlacement="top"] > .tabbar::after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar::before{
+    background: transparent ;
+    height : 0px;
+}
+.fixed-content , .scroll-content{
+    margin-top: 56px !important ;
+}
+.toolbar-background{
+    background-color: #efeff1 !important ;
+}
+// @import '../../www/assets/fonts/diyicon.scss'

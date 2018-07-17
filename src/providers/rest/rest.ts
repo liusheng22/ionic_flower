@@ -105,8 +105,8 @@ export class RestProvider {
     return this.getUrlReturn(this.apiUrlCarousel )
   }
 
-  recommend(flowerName):Observable<string[]>{
-    return this.getUrlReturn(this.apiUrlRecommend + "?flowerName=" + flowerName)
+  recommend(flowerName , page):Observable<string[]>{
+    return this.getUrlReturn(this.apiUrlRecommend + "?flowerName=" + flowerName +"&page=" + page )
   }
 
   mainClassImg():Observable<string[]>{

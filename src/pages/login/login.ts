@@ -42,6 +42,8 @@ export class LoginPage extends BaseUi{
 
   ionViewDidEnter(){
     this.locationTracker.startTracking() ;
+    this.latitude = this.locationTracker.lat;
+    this.longitude = this.locationTracker.lng;
   }
 
   /**
@@ -69,9 +71,6 @@ export class LoginPage extends BaseUi{
     //       this.conLongitude = data.coords.longitude
     //   });
 
-    this.locationTracker.startTracking() ;  //获得定位
-    this.latitude = this.locationTracker.lat;
-    this.longitude = this.locationTracker.lng;
     
     var loading = super.showLoading(this.loadingCtrl , "登录中...")
     

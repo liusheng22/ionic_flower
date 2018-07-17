@@ -21,7 +21,8 @@
     </ion-navbar>
   -->
   <ion-toolbar >
-    <ion-searchbar placeholder="搜索: 想找点什么..."></ion-searchbar>
+    <!-- <ion-searchbar placeholder="搜索: 想找点什么..."></ion-searchbar> -->
+    <ion-input type="search" placeholder="  搜索: 想找点什么..." clearInput (click)="goToSearch()" ></ion-input>
     <ion-icon name="text" class="top_header_message_icon"></ion-icon>
   </ion-toolbar>
 

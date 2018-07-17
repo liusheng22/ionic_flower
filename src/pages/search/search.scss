@@ -1,29 +1,4 @@
-page-home {
-    *{
-        // font-family: "Helvetica Neue",Helvetica,PingFangSC-Regular,'Microsoft Yahei',verdana,Arial,sans-serif;
-        // font-size: 12px;
-        // color: #666666;
-    }
-    #demo{
-        $colors: (
-            primary:    #488aff,
-            secondary:  #32db64,
-            danger:     #f53d3d,
-            light:      #f4f4f4,
-            dark:       #222
-        );
-    }
-    body,h1,h2,h3,h4,h5,h6,img,li,ol,ul{
-        margin: 0;
-        padding: 0;
-    }
-    a,span,p{
-        display: inline-block;
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        text-decoration: none;
-    }
+page-search {
     // 导航栏 -start
     .top_header_message_icon{
         float: left;
@@ -52,63 +27,18 @@ page-home {
     }
     // 导航栏 -end
 
-    // 轮播图 -start
-    .carousel{
-        height: 170px;
-        width: 100%;
+    //通用
+    body,h1,h2,h3,h4,h5,h6,img,li,ol,ul{
+        margin: 0;
+        padding: 0;
     }
-    // 轮播图 -end
-
-    // 商品分类 -start
-    .goodsCategory{
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-wrap: wrap;
-        margin: 10px 0;
-        justify-content: space-between;
-        align-self: flex-end;
-    }
-    .flowerKind,.preservedKind{
-        width: 45%;
-        height: 100%;
-        margin: 0 auto;
-    }
-    .flowerKind>a,.preservedKind>a{
+    a,span,p{
         display: inline-block;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        text-decoration: none;
     }
-    .flowerKind>a>img,.preservedKind>a>img{
-        border-radius: 10px;
-    }
-    // 商品分类 -end
-
-    // 主页 标题 -start
-    .main_title{
-        border-bottom: 1px solid #ececec;
-        position: relative;
-        margin-top: 15px;
-    }
-    h3.main_title_text{
-        font-size: 20px;
-        font-weight: 400;
-        margin-bottom: 5px;
-        text-indent: 5px;
-        margin-left: 10px;
-    }
-    h3.main_title_text:before {
-        content: "";
-        width: 80px;
-        height: 2px;
-        left: 10px;
-        bottom: -1px;
-        position: absolute;
-        margin-left: 2px;
-        background-color: #d2a042;
-    }
-    h3.main_title_text>i{
-        font-size: 12px;
-    }
-    // 主页 标题 -end
 
     // 推荐商品列表 -start
     .col{

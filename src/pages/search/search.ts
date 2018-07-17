@@ -1,4 +1,4 @@
-import { Component ,ElementRef  } from '@angular/core';
+import { Component ,ElementRef , ViewChild  } from '@angular/core';
 import { NavController , NavParams , IonicPage , LoadingController, ToastController , InfiniteScroll } from 'ionic-angular';
 import { Storage } from '@ionic/Storage'
 import { RestProvider } from '../../providers/rest/rest';
@@ -9,10 +9,12 @@ import { LoadmoreProvider } from '../../providers/loadmore/loadmore'
 
 @IonicPage()
 @Component({
-  selector: 'page-class-list',
-  templateUrl: 'class-list.html',
+  selector: 'page-search',
+  templateUrl: 'search.html',
 })
-export class ClassListPage extends BaseUi {
+export class SearchPage extends BaseUi {
+  @ViewChild('searchInput') searchInput;
+  keyword : any ;
   cName : any;
   uid : any;
   errorMessage : any;
@@ -22,6 +24,7 @@ export class ClassListPage extends BaseUi {
   group_isShow = "" ;
   temporaryVar : any ;  //临时全局变量
   loadPage : number ; //加载的页数
+  infinite : any ; //上拉加载更多的event事件
   ishas_add = [
     {
       name : "",
@@ -117,10 +120,11 @@ export class ClassListPage extends BaseUi {
     public rest : RestProvider,
     public loadmore : LoadmoreProvider ,
   ) {
-      super();
+    super();
   }
-
+  
   ionViewDidLoad(){ //生命周期 => 页面加载前
+    this.rest.hideTabs();
     this.cName = this.navParams.get('cName');
     this.uid = this.navParams.get('uid');
 
@@ -128,7 +132,6 @@ export class ClassListPage extends BaseUi {
       if(val) { //验证是否登陆,如果用户登录了,加载 商品信息
         var loading = this.showLoading(this.loadCtrl , "不要着急,加载中...");
         this.uid = val;
-        this.loadClassInfo(this.cName);
         loading.dismiss()
       }else{  //如果没有登陆,跳转到 登陆 页
         this.navCtrl.push(RegisterPage,{
@@ -138,43 +141,58 @@ export class ClassListPage extends BaseUi {
     })
   }
 
-  ionViewDidEnter(){  //当进入页面时触发
+  ionViewDidEnter(){  //当进入页面时触发 
     this.rest.hideTabs();
-  }  
+    setTimeout(() => {
+      this.rest.hideTabs();
+      this.searchInput.setFocus();
+    },150)
+  }
+
   ionViewWillLeave(){  //当将要从页面离开时触发
     this.rest.showTabs();
   }
 
   doRefresh(refresher){ //下拉刷新
-    this.loadClassInfo(this.cName);
+    this.loadClassInfo(this.keyword);
     refresher.complete();
   }
 
   doInfinite(infinite : InfiniteScroll){  //上拉加载更多
-    console.log(infinite)
     this.loadPage++ ;
-    
-    this.rest.recommend(this.cName,this.loadPage)
+    this.infinite = infinite ;
+    console.log()
+
+    this.rest.productList(this.keyword,this.loadPage,10)
       .subscribe(product => {
         if(product['status'] == false){
           super.showToast(this.toastCtrl, product['msg']);
-          infinite.enable(false);
+          this.infinite.enable(false);
         }else{
-          this.classList = this.classList.concat( product );
+          this.classList = this.classList.concat( product['data'] );
           console.log(this.classList)
         }
 
-        infinite.complete();  
+        infinite.complete();
       },error => this.errorMessage = <any>error)
   }
 
-  loadClassInfo(cName){  //加载 商品分类信息
-    this.rest.recommend(cName,1)
+  searchProduct(kd : any ){
+    this.loadClassInfo(kd);
+    if(this.infinite){
+      this.infinite.enable(true);
+    }
+  }
+
+  loadClassInfo(keyword : any){  //首次加载搜索的关键字相关商品
+    this.rest.hideTabs();
+
+    this.rest.productList(keyword,1,10)
       .subscribe(product => {
         if(product['status'] == false){
           super.showToast(this.toastCtrl, product['msg']);
         }else{
-          this.classList = product;
+          this.classList = product['data'];
           this.loadPage = 1 ;
         }
       },error => this.errorMessage = <any>error)

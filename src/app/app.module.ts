@@ -26,6 +26,7 @@ import { ChatdetailsPage } from '../pages/chatdetails/chatdetails'
 import { ScanPage } from '../pages/scan/scan'
 import { CommentPage } from '../pages/comment/comment'
 import { VersionsPage } from '../pages/versions/versions';
+import { SearchPage } from '../pages/search/search'
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -51,6 +52,7 @@ import { AppVersion } from '@ionic-native/app-version'
 
 //引入时间处理包
 import { RelativetimePipe } from '../pipes/relativetime/relativetime'
+import { LoadmoreProvider } from '../providers/loadmore/loadmore';
 
 @NgModule({
   declarations: [
@@ -77,13 +79,16 @@ import { RelativetimePipe } from '../pipes/relativetime/relativetime'
     HeadfacePage,
     RelativetimePipe,
     VersionsPage,
-    CollectPage
+    CollectPage,
+    SearchPage
   ],
   imports: [  //全局模块
     BrowserModule,
     HttpModule, //全局需要导入 HTTP
     IonicModule.forRoot(MyApp , {
-      backButtonText : '返回',
+      backButtonText : '',
+      // backButtonIcon: 'arrow-dropleft-circle',//按钮图标样式
+      backButtonIcon: 'ios-arrow-back-outline',//按钮图标样式
     }),
     ComponentsModule,
     IonicStorageModule.forRoot(),   //全局定义 storage 引入的方式不一样
@@ -112,8 +117,8 @@ import { RelativetimePipe } from '../pipes/relativetime/relativetime'
     ScanPage,
     HeadfacePage,
     VersionsPage,
-    CollectPage
-    
+    CollectPage,
+    SearchPage
   ],
   providers: [
     StatusBar,
@@ -122,6 +127,7 @@ import { RelativetimePipe } from '../pipes/relativetime/relativetime'
     BackgroundGeolocation,
     LocationTrackerProvider,
     BackbuttonProvider,
+    LoadmoreProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestProvider,   //rest 的导入
     File,
@@ -134,7 +140,8 @@ import { RelativetimePipe } from '../pipes/relativetime/relativetime'
     SettingProvider,
     AppVersion,
     LocationTrackerProvider,
-    BackbuttonProvider
+    BackbuttonProvider,
+    LoadmoreProvider
   ]
 })
 export class AppModule {}

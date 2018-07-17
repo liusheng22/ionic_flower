@@ -54,6 +54,7 @@ export class UserPage extends BaseUi{
   }
 
   ionViewDidEnter() {  //生命周期 => 页面加载完之后
+    this.rest.hideTabs();
     this.loadUserPage();
   }
 

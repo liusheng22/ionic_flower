@@ -28,14 +28,14 @@ export class ScanPage {
   ionViewDidEnter(){  //当进入页面时触发
     this.scanQRScanner();
     this.rest.hideTabs();
-  }  
+  }
+  
   ionViewWillLeave(){  //当将要从页面离开时触发
     this.rest.showTabs();
   }  
 
   scanQRScanner(){
     this.qrscnner.prepare()
-
       .then((status:QRScannerStatus)=>{
         if(status.authorized){
           let scanSub = this.qrscnner.scan().subscribe((text:string)=>{

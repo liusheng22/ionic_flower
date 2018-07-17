@@ -1,17 +1,9 @@
-<!--
-  Generated template for the ClassListPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>{{cName}}</ion-title>
-  </ion-navbar>
-
+  <ion-toolbar >
+    <ion-input #searchInput type="search" [(ngModel)]="keyword"  placeholder="  搜索: 想找点什么..." clearInput (keyup.enter)="searchProduct(keyword,$event)" ></ion-input>
+    <ion-icon name="search" class="top_header_message_icon" (click)="searchProduct(keyword)" ></ion-icon>
+  </ion-toolbar>
 </ion-header>
-
 
 <ion-content>
   <ion-refresher (ionRefresh)="doRefresh($event)" >

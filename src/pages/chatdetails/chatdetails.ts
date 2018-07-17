@@ -45,7 +45,7 @@ export class ChatdetailsPage extends BaseUi {
   }
 
   ionViewDidEnter(){  //页面渲染前，开始调用消息
-    // this.rest.hideTabs();
+    this.rest.hideTabs();
 
     this.storage.get("userId").then((val) => {
       if(val) { //验证是否登陆,如果用户登录了,加载 用户信息
