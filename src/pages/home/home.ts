@@ -7,6 +7,7 @@ import { BaseUi } from '../../common/baseui';
 import { ProductdetailPage } from '../../pages/productdetail/productdetail'
 import { ClassListPage } from '../../pages/class-list/class-list'
 import { SearchPage } from '../../pages/search/search'
+import { LoginPage } from '../login/login';
 // import {Gesture} from 'ionic-angular/gestures/gesture';
 
 @Component({
@@ -16,21 +17,15 @@ import { SearchPage } from '../../pages/search/search'
 })
 
 export class HomePage extends BaseUi{
-  uname = "";
-  upwd = "";
-  demo = 'Title';
-  favorites = 'recent';
-  apps = 'free';
   group_isShow = "" ;
   QRcode = "";
   QRshow : any;
-  // ishas_add = "";
-  setId = "100001"
-  tapName = [["name"]]
   elem : any;
   errorMessage : any;
   flowerName : any;
-  ishas_add = [
+  uid : string;
+  temporaryVar : any ;
+  ishas_add = [ //判断
     {
       name : "",
       status : false,
@@ -40,10 +35,8 @@ export class HomePage extends BaseUi{
       status : false,
     }
   ]
-  
   banner = [  //banner轮播图
   ];
-
   goodsCategoryImg = [  //商品分类主图
     {
       src:"",
@@ -57,9 +50,7 @@ export class HomePage extends BaseUi{
       alt:""
     }
   ];
-
   recommendNumArr = [] //需要展示的推荐个数的数组
-
   mainContent = [ //推荐商品分类的标题
     {
       main_til:"",
@@ -70,10 +61,8 @@ export class HomePage extends BaseUi{
       main_til_i:"",
     }
   ];
-
   goodsRecommend = [ //商品推荐
   ];
-
   group_btn = [ //商品工具按钮
     {
       className:"cart group_btn_list",
@@ -108,17 +97,12 @@ export class HomePage extends BaseUi{
       color:"primary"
     }
   ]
-
   colorName = [{
     color : "colorName"
   },{
     color:""
   }]
 
-  temporaryVar : any ;
-
-  uid : string;
- 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams  ,
@@ -130,18 +114,6 @@ export class HomePage extends BaseUi{
     private keyboard: Keyboard,
     public rest : RestProvider) {
       super();
-      // let tabs = document.querySelectorAll('.tabbar');
-      // if ( tabs !== null ) {
-      //   Object.keys(tabs).map((key) => {
-      //     tabs[ key ].style.transform = 'translateY(56px)';
-      //   });
-      // }
-
-      // let scrollContent = document.querySelectorAll('.scroll-content');
-      // let scrollContent = document.querySelectorAll('.scroll-content');
-      // Object.keys(scrollContent).map((key) => {
-      //   scrollContent[ key ].style.marginBottom = '0px';
-      // });
   }
 
   ionViewDidEnter() {  //生命周期 => 页面加载完之后
@@ -175,7 +147,7 @@ export class HomePage extends BaseUi{
       }
     }else if(btnFunName == "加入收藏"){
         this.storage.get("userId").then((val) => {
-          if(val != null) { //验证是否登陆,如果用户登录了,加载 商品信息
+          // if(val != null) { //验证是否登陆,如果用户登录了,加载 商品信息
             this.rest.addToCollect(val,pid)
                 .subscribe(res => {  //返回 收藏 接口信息
                   console.log(res)
@@ -192,7 +164,7 @@ export class HomePage extends BaseUi{
                   }
                   super.showToast(this.toastCtrl, res["msg"]);
                 },error => this.errorMessage = <any>error)
-          }
+          // }
         })
     }else if(btnFunName == "二维码"){
       if(this.QRshow){
@@ -256,31 +228,13 @@ export class HomePage extends BaseUi{
         this.getRecommend("鲜花")
         loading.dismiss()
       }else{  //如果没有登陆,跳转到 登陆 页
-        // this.navCtrl.push(RegisterPage,{
-        //   status:'noLogin'
-        // });
+        this.navCtrl.push(LoginPage);
       }
     })
   }
 
   goToSearch(){
     this.navCtrl.push(SearchPage)
-  }
-
-  isHasAddTo(btnFunName){ //判断该用户 对该 是否已 收藏 或 
-    if(btnFunName == "加入购物车"){
-      if(this.ishas_add[0].status){
-        return true;
-      }else{
-        return false;
-      }
-    }else if(btnFunName == "加入收藏"){
-      if(this.ishas_add[1].status){
-        return true;
-      }else{
-        return false;
-      }
-    }
   }
 
   async showGroupBtn(pid){  //长按商品图片 获得其ID 显示工具按钮

@@ -246,22 +246,6 @@ export class SearchPage extends BaseUi {
     }
   }
 
-  isHasAddTo(btnFunName){ //判断该用户 对该 是否已 收藏 或 
-    if(btnFunName == "加入购物车"){
-      if(this.ishas_add[0].status){
-        return true;
-      }else{
-        return false;
-      }
-    }else if(btnFunName == "加入收藏"){
-      if(this.ishas_add[1].status){
-        return true;
-      }else{
-        return false;
-      }
-    }
-  }
-
   async showGroupBtn(pid){  //长按商品图片 获得其ID 显示工具按钮
     // this.elem = this.el.nativeElement.querySelector('.product_pic') //获取DOM元素
     this.QRshow = true;
