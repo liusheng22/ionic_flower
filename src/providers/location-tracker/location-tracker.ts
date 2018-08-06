@@ -18,6 +18,7 @@ export class LocationTrackerProvider {
   }
 
   startTracking(){  //开始追踪
+    this.backgroundGeolocation.start()
     let config : BackgroundGeolocationConfig = {
       desiredAccuracy: 0,
       stationaryRadius: 20,

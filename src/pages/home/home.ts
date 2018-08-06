@@ -1,5 +1,5 @@
 import { Component ,ElementRef  } from '@angular/core';
-import { Events ,NavController , NavParams , LoadingController, ToastController  } from 'ionic-angular';
+import { Events ,NavController , NavParams , LoadingController, ToastController, ModalController  } from 'ionic-angular';
 import { Keyboard } from '@ionic-native/keyboard';
 import { Storage } from '@ionic/Storage'
 import { RestProvider } from '../../providers/rest/rest';
@@ -111,6 +111,7 @@ export class HomePage extends BaseUi{
     public toastCtrl : ToastController,
     public storage : Storage,
     private event: Events, 
+    public modalCtrl: ModalController,
     private keyboard: Keyboard,
     public rest : RestProvider) {
       super();
@@ -195,8 +196,51 @@ export class HomePage extends BaseUi{
 
   ionViewDidLoad(){ //生命周期 => 页面加载前
     this.keyboard.onKeyboardShow().subscribe(()=>this.event.publish('hideTabs'));
-	  this.keyboard.onKeyboardHide().subscribe(()=>this.event.publish('showTabs'));
+    this.keyboard.onKeyboardHide().subscribe(()=>this.event.publish('showTabs'));
+    
+    this.getMainClassImg()
+    // this.storage.get("userId").then((val) => {
+    //   if(val != null) { //验证是否登陆,如果用户登录了,加载 商品信息
+    //     this.uid = val;
+    //     var loading = super.showLoading(this.loadCtrl, "加载中...")
+    //     this.rest.mainClassImg()
+    //       .subscribe(res => {  //加载 商品信息
+    //         console.log(res)
+    //         res.forEach((v,idx)=>{
+              
+    //           this.recommendNumArr.push(Number(v['con']))
 
+    //           this.mainContent[idx].main_til = v['main_til']
+    //           this.mainContent[idx].main_til_i = v['main_til_i']
+
+    //           this.goodsCategoryImg[idx].src = v['src']
+    //           this.goodsCategoryImg[idx].href = v['href']
+    //           this.goodsCategoryImg[idx].className = v['className']
+    //           this.goodsCategoryImg[idx].alt = v['alt']
+    //         })
+    //       },error => this.errorMessage = <any>error)
+        
+    //     this.rest.carousel()
+    //       .subscribe(res => {  //加载 轮播图
+    //         console.log(res)
+    //         this.banner = res
+    //       },error => this.errorMessage = <any>error)
+        
+    //     this.getRecommend("永生花")
+    //     this.getRecommend("鲜花")
+    //     loading.dismiss()
+    //   }else{  //如果没有登陆,跳转到 登陆 页
+    //     // this.navCtrl.push(LoginPage);
+    //     let modal = this.modalCtrl.create(LoginPage)
+    //     modal.onDidDismiss(()=>{  //让副页面刷新，不会登录成功后还停留在登录面板，
+    //       this.loadUserPage()   //因为modal关闭时，不会再次触发ionViewDidEnter周期函数了
+    //     })
+    //     modal.present();
+    //   }
+    // })
+  }
+
+  getMainClassImg(){
     this.storage.get("userId").then((val) => {
       if(val != null) { //验证是否登陆,如果用户登录了,加载 商品信息
         this.uid = val;
@@ -228,7 +272,12 @@ export class HomePage extends BaseUi{
         this.getRecommend("鲜花")
         loading.dismiss()
       }else{  //如果没有登陆,跳转到 登陆 页
-        this.navCtrl.push(LoginPage);
+        // this.navCtrl.push(LoginPage);
+        let modal = this.modalCtrl.create(LoginPage)
+        modal.onDidDismiss(()=>{  //让副页面刷新，不会登录成功后还停留在登录面板，
+          this.getMainClassImg()   //因为modal关闭时，不会再次触发ionViewDidEnter周期函数了
+        })
+        modal.present();
       }
     })
   }
