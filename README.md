@@ -38,7 +38,7 @@
 ## 项目地址
 * 移动端: [移动端web](http://laijiayang.cn/rose)
 * APK下载：[APK](https://www.laiwenge.com/rose/Fun.apk)
-* Github：[APK](https://github.com/liusheng22/ionic_flower)
+* Github：[Github](https://github.com/liusheng22/ionic_flower)
 
 ## 关于作者
 ```javascript
